@@ -1,6 +1,16 @@
 import pandas  as pd
 import pyodbc
 
+'''
+INSTRUÇÕES PARA TRANSFORMAR EM CSV
+
+importar módulo
+
+cnxn = db_connect.create_connection()
+cursor = cnxn.cursor()
+df = db_connect.create_df(tablename, cursor) -> tabelas disponíveis abaixo, retorna pd.DataFrame
+'''
+
 server = 'tcp:fgv-db-server.database.windows.net,1433'
 database = 'fgv-db'
 username = 'student'
@@ -57,3 +67,15 @@ def create_connection():
     cnxn_string = f'DRIVER=ODBC Driver 17 for SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password};'
     cnxn = pyodbc.connect(cnxn_string)
     return cnxn
+
+def create_df(tablename, cursor):
+    query = f'SELECT * FROM {tablename};'
+    cursor.execute(query)
+    rows = cursor.fetchall()
+    cols = [t[0] for t in rows[0].cursor_description]
+    values = [list(rows[i]) for i in range(len(rows))]
+    df = pd.DataFrame(values, columns=cols)
+    return df
+
+def save_df_csv(df, name):
+    df.to_csv(name + '.csv')
