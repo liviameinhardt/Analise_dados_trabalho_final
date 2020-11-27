@@ -6,16 +6,54 @@ database = 'fgv-db'
 username = 'student'
 password = '@dsInf123'
 
-cnxn_string = f'DRIVER=ODBC Driver 17 for SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password};'
-cnxn = pyodbc.connect(cnxn_string)
-cursor = cnxn.cursor()
+### AVAILABLE TABLES:
+    
+    # covid.covid_impact_on_airport_traffic
+    # fifa.fifa_players
+    # real_state.real_state_values
+    # ufc.ufc_master
+    # ufc.ufc_most_recent_event
+    # ufc.ufc_upcoming_event
 
-while True:
-    query = input('>>> ')
-    if query == '-1':
-        cnxn.close()
-        break
-    cursor.execute(query)
-    r = cursor.fetchall()
-    for t in r:
-        print(t)
+### USEFUL COMMANDS:
+    
+    # cur = cnxn.cursor()
+    
+    # INFO ABOUT ROW:
+        # pyodbc.Row.cursor_description
+        
+        # IN ORDER:
+        
+            # column name (or alias, if specified in the SQL)
+            # type code
+            # display size (pyodbc does not set this value)
+            # internal size (in bytes)
+            # precision
+            # scale
+            # nullable (True/False)
+
+    
+    # INFO ABOUT TABLES
+    # cur.tables -> tables -> pyodbc.Row objects
+        # cur.tables.table_name
+        # result = [table for table in cur.tables]
+        # result[0].cursor_description
+        
+    # INFO ABOUT COLUMNS
+    # result = cursor.columns(table='fifa_players') -> pyodbc.Row object
+    # result = iter(result)
+    # col = next(result)
+    
+    
+### TAKING VALUES INTO PANDAS
+
+    # cursor.execute(query)
+    # rows = cursor.fetchmany(10)
+    # cols = [t[0] for t in rows.cursor_description]
+    # values = [list(rows[i]) for i in range(len(rows))] -> list of lists
+    # df = pd.DataFrame(values, columns=cols)
+
+def create_connection():
+    cnxn_string = f'DRIVER=ODBC Driver 17 for SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password};'
+    cnxn = pyodbc.connect(cnxn_string)
+    return cnxn
