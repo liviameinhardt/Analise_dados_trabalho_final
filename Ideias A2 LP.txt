@@ -1,0 +1,26 @@
+FEITO EM GRUPO
+
+Análise dos dados
+Salário x Habilidades - Modelo
+Análise das nacionalidades
+Nacionalidade x International_Reputation
+Melhor camisa por país
+	Separa por país - Pega n melhores jogadores - Vê camisa mais comum
+
+Prever posição baseado nas habilidades
+	- Regressão
+	- Analisa erro
+	- Pega pos com menor erro
+		- Matriz de projeção
+		- Ax = b
+		- Px' = p
+		- e = (b - p)
+
+Idade x Overall/potencial (perguntas separadas?)
+Valor x salário
+Distribuição dos salários
+
+- Remover:
+	- Imagens
+	- Goleiro
+	- Loaned_From
