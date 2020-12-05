@@ -10,17 +10,21 @@ import numpy as np
 
 def drop_cols(df):
     columns={'Unnamed: 0', 'Counter', 'Photo', 'Flag', 'Club_Logo', 'Loaned_From', 'Real_Face', 'Work_Rate'}
-    df.drop(columns, inplace=True)
+    df.drop(columns=columns, inplace=True)
     return df
 
 def drop_na_pos(df):
-    non_na = df.shape[1] - 26
+    non_na = df.shape[1] - 5 #Valor arbitrário para permitir alguns NA
     df.dropna(thresh=non_na, inplace=True)
     return df
 
 def drop_na_ReleaseClause(df):
     flt = df['Release_Clause'].notna()
     df = df[flt]
+    return df
+
+def set_index(df):
+    df.set_index('ID', inplace=True)
     return df
 
 def remove_plus_sign(string):
@@ -34,7 +38,7 @@ def clean_position_cols(df):
     start = cols.index('LS')
     end = start + 26
 
-    position_columns = df[start:end]
+    position_columns = df.columns[start:end]
     for column in position_columns:
         df[column] = df[column].apply(remove_plus_sign)
     return df
@@ -64,7 +68,7 @@ def lbs_to_kg(value):
     value = float(value[:-3])
     return round(value * 0.4535923, 0)
 
-def clean_wight_col(df):
+def clean_weight_col(df):
     df['Weight'] = df['Weight'].apply(lbs_to_kg)
     return df
 
@@ -83,4 +87,28 @@ def adjust_dtypes(df):
     df['Joined'] = pd.to_datetime(df['Joined'])
     df['Contract_Valid_Until'] = pd.to_numeric(df['Contract_Valid_Until'])
     return df
+
+def clean_dataframe(df):
+    df = drop_cols(df)
+    df = drop_na_pos(df)
+    df = drop_na_ReleaseClause(df)
+    df = set_index(df)
+    df = clean_position_cols(df)
+    df = clean_money_cols(df)
+    df = clean_weight_col(df)
+    df = clean_height_col(df)
+    df = adjust_dtypes(df)
+    return df
+
+if __name__ == '__main__':
+    df = pd.read_csv('../Dados/fifa_players.csv')
+    df = clean_dataframe(df)
+
+
+
+
+
+
+
+
 
