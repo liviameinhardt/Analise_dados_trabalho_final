@@ -40,7 +40,8 @@ def clean_position_cols(df):
 
     position_columns = df.columns[start:end]
     for column in position_columns:
-        df[column] = df[column].apply(remove_plus_sign)
+        s = df[column].apply(remove_plus_sign)
+        df.loc[:, column] = s
     return df
 
 def money_to_int(value):
@@ -59,7 +60,7 @@ def money_to_int(value):
 def clean_money_cols(df):
     cols = ['Value', 'Wage', 'Release_Clause']
     for col in cols:
-        df[col] = df[col].apply(money_to_int)
+        df.loc[:, col] = df[col].apply(money_to_int)
     return df
 
 def lbs_to_kg(value):
@@ -69,7 +70,7 @@ def lbs_to_kg(value):
     return round(value * 0.4535923, 0)
 
 def clean_weight_col(df):
-    df['Weight'] = df['Weight'].apply(lbs_to_kg)
+    df.loc[:, 'Weight'] = df['Weight'].apply(lbs_to_kg)
     return df
 
 def ft_to_meters(value):
@@ -80,12 +81,12 @@ def ft_to_meters(value):
     return round(float(inches * 0.0254), 2)
 
 def clean_height_col(df):
-    df['Height'] = df['Height'].apply(ft_to_meters)
+    df.loc[:, 'Height'] = df['Height'].apply(ft_to_meters)
     return df
 
 def adjust_dtypes(df):
-    df['Joined'] = pd.to_datetime(df['Joined'])
-    df['Contract_Valid_Until'] = pd.to_numeric(df['Contract_Valid_Until'])
+    df.loc[:, 'Joined'] = pd.to_datetime(df['Joined'])
+    df.loc[:, 'Contract_Valid_Until'] = pd.to_numeric(df['Contract_Valid_Until'])
     return df
 
 def clean_dataframe(df):
@@ -93,8 +94,9 @@ def clean_dataframe(df):
     df = drop_na_pos(df)
     df = drop_na_ReleaseClause(df)
     df = set_index(df)
-    df = clean_position_cols(df)
     df = clean_money_cols(df)
+    df = clean_position_cols(df)
+    # df = clean_money_cols(df)
     df = clean_weight_col(df)
     df = clean_height_col(df)
     df = adjust_dtypes(df)
