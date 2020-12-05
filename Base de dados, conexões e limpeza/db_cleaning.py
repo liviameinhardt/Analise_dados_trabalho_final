@@ -1,12 +1,6 @@
 import pandas as pd
-import numpy as np
 
-# def def_df(path):
-#     if path is pd.DataFrame:
-#         df = path
-#     else:
-#         df = pd.read_csv(path)
-#     return df
+pd.set_option('mode.chained_assignment', None)
 
 def drop_cols(df):
     columns={'Unnamed: 0', 'Counter', 'Photo', 'Flag', 'Club_Logo', 'Loaned_From', 'Real_Face', 'Work_Rate'}
@@ -40,8 +34,7 @@ def clean_position_cols(df):
 
     position_columns = df.columns[start:end]
     for column in position_columns:
-        s = df[column].apply(remove_plus_sign)
-        df.loc[:, column] = s
+        df.loc[:, column] = df.loc[:, column].apply(remove_plus_sign)
     return df
 
 def money_to_int(value):
@@ -94,9 +87,8 @@ def clean_dataframe(df):
     df = drop_na_pos(df)
     df = drop_na_ReleaseClause(df)
     df = set_index(df)
-    df = clean_money_cols(df)
     df = clean_position_cols(df)
-    # df = clean_money_cols(df)
+    df = clean_money_cols(df)
     df = clean_weight_col(df)
     df = clean_height_col(df)
     df = adjust_dtypes(df)
