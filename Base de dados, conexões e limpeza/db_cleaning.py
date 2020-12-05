@@ -1,7 +1,5 @@
 import pandas as pd
 
-pd.set_option('mode.chained_assignment', None)
-
 def drop_cols(df):
     columns={'Unnamed: 0', 'Counter', 'Photo', 'Flag', 'Club_Logo', 'Loaned_From', 'Real_Face', 'Work_Rate'}
     df.drop(columns=columns, inplace=True)
@@ -82,16 +80,22 @@ def adjust_dtypes(df):
     df.loc[:, 'Contract_Valid_Until'] = pd.to_numeric(df['Contract_Valid_Until'])
     return df
 
+def foot_to_dummie(df):
+    array = (df['Preferred_Foot'] == 'Right')
+    df.loc[:, 'Preferred_Foot'] = array
+    return df
+
 def clean_dataframe(df):
-    df = drop_cols(df)
-    df = drop_na_pos(df)
-    df = drop_na_ReleaseClause(df)
-    df = set_index(df)
-    df = clean_position_cols(df)
-    df = clean_money_cols(df)
-    df = clean_weight_col(df)
-    df = clean_height_col(df)
-    df = adjust_dtypes(df)
+    df = drop_cols(df.copy())
+    df = drop_na_pos(df.copy())
+    df = drop_na_ReleaseClause(df.copy())
+    df = set_index(df.copy())
+    df = clean_position_cols(df.copy())
+    df = clean_money_cols(df.copy())
+    df = clean_weight_col(df.copy())
+    df = clean_height_col(df.copy())
+    df = adjust_dtypes(df.copy())
+    df = foot_to_dummie(df.copy())
     return df
 
 if __name__ == '__main__':
