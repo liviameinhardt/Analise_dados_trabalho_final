@@ -21,7 +21,7 @@ def set_index(df):
 
 def remove_plus_sign(string):
     if string[-2] != '+':
-        raise TypeError('Penúltimo dígito de {} não é um "+" - Ajustar função'.format(string))
+        raise ValueError('Penúltimo dígito de {} não é um "+" - Ajustar função'.format(string))
     num = string[:-2]
     return int(num)
 
@@ -46,7 +46,7 @@ def money_to_int(value):
         return money * 1_000
     elif multiplier == 'M':
         return money * 1_000_000
-    raise TypeError('Erro no multiplicador do valor {}'.format(value))
+    raise ValueError('Erro no multiplicador do valor {}'.format(value))
 
 def clean_money_cols(df):
     cols = ['Value', 'Wage', 'Release_Clause']
@@ -56,7 +56,7 @@ def clean_money_cols(df):
 
 def lbs_to_kg(value):
     if value[-3:] != 'lbs':
-        raise TypeError('Erro de unidade: três úl timos dígitos de {} não são "lbs"'.format(value))
+        raise ValueError('Erro de unidade: três úl timos dígitos de {} não são "lbs"'.format(value))
     value = float(value[:-3])
     return round(value * 0.4535923, 0)
 
