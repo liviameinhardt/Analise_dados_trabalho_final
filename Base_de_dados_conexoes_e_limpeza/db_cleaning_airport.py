@@ -7,7 +7,7 @@ def drop_cols(df):
     return df
 
 def create_datetime_cols(df):
-    df['Date'] = pd.to_datetime(df['Date'])
+    df.loc[:, 'Date'] = pd.to_datetime(df['Date'])
     df.loc[:, 'Year'] = df['Date'].dt.year
     df.loc[:, 'Month'] = df['Date'].dt.month
     df.loc[:, 'Day'] = df['Date'].dt.day
