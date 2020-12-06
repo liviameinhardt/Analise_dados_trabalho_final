@@ -1,3 +1,4 @@
+#%%
 import pandas  as pd
 import pyodbc
 '''
@@ -65,6 +66,9 @@ class invalid_server_string_format(ValueError):
 class invalid_server_port_value(ValueError):
     pass
 
+class invalid_table_name(ValueError):
+    pass
+
 def create_connection(server:str, database:str, username:str, password:str) -> pyodbc.Connection:
     """Cria uma conexão com uma base de dados online
 
@@ -95,21 +99,30 @@ def create_connection(server:str, database:str, username:str, password:str) -> p
     return cnxn
 
 
-
-def create_df(tablename:str, cursor:pyodbc.Connection.cursor)->pd.DataFrame:
+def create_df(tablename:str, cursor:pyodbc.Cursor)->pd.DataFrame:
     """A partir de um cursor e o nome de um tabela acessável por esse cursor retorna um pd.DataFrame
 
     Parameters
     ----------
     tablename : str
         Nome da tabela presente no banco
-    cursor : pyodbc.Connection.cursor
+    cursor : pyodbc.Cursor
 
     Returns
     -------
     pd.DataFrame
         DataFrame com dados do banco 
     """
+    if type(tablename)!=str:
+        raise TypeError
+    if type(cursor) != pyodbc.Cursor:
+        raise TypeError
+
+    table_names = [str(name[1])+'.'+str(name[2]) for name in cursor.tables(tableType='Table').fetchall()]
+
+    if not(tablename in table_names):
+        raise invalid_table_name
+
     query = f'SELECT * FROM {tablename};'
     cursor.execute(query)
     rows = cursor.fetchall()
@@ -129,7 +142,9 @@ def save_df_csv(df:pd.DataFrame, name:str):
     name : str
         Nome do que será atribuido ao arquivo .csv
     """
-    df.to_csv(name + '.csv')
+    if type(df)!=pd.DataFrame or type(name)!= str:
+        raise TypeError
 
+    df.to_csv(name + '.csv')
 
 
