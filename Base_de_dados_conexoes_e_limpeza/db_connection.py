@@ -52,7 +52,6 @@ password = '@dsInf123'
     # result = iter(result)
     # col = next(result)
 
-    
 ### TAKING VALUES INTO PANDAS
 
     # cursor.execute(query)
@@ -60,6 +59,11 @@ password = '@dsInf123'
     # cols = [t[0] for t in rows.cursor_description]
     # values = [list(rows[i]) for i in range(len(rows))] -> list of lists
     # df = pd.DataFrame(values, columns=cols)
+class invalid_server_string_format(ValueError):
+    pass
+
+class invalid_server_port_value(ValueError):
+    pass
 
 def create_connection(server:str, database:str, username:str, password:str) -> pyodbc.Connection:
     """Cria uma conexão com uma base de dados online
@@ -79,18 +83,27 @@ def create_connection(server:str, database:str, username:str, password:str) -> p
     -------
     pyodbc.Connection
     """
+    if not (type(server)==str and type(server)==type(database) and type(server)==type(username) and type(username)==type(password)):
+        raise TypeError('Todos os parametros devem ser no formato str()')
+    if server[0:3]!='tcp' or server[-5] != ',':
+        raise invalid_server_string_format
+    if not(server[-4:].isnumeric()):
+        raise invalid_server_port_value
+
     cnxn_string = f'DRIVER=ODBC Driver 17 for SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password};'
     cnxn = pyodbc.connect(cnxn_string)
     return cnxn
 
-def create_df(tablename:str, cursor:pyodbc.Cursor)->pd.DataFrame:
-    """A partir de um cursor e o nome de um tabela acessávl por esse cursor retorna um pd.DataFrame
+
+
+def create_df(tablename:str, cursor:pyodbc.Connection.cursor)->pd.DataFrame:
+    """A partir de um cursor e o nome de um tabela acessável por esse cursor retorna um pd.DataFrame
 
     Parameters
     ----------
     tablename : str
         Nome da tabela presente no banco
-    cursor : pyodbc.Cursor
+    cursor : pyodbc.Connection.cursor
 
     Returns
     -------
@@ -117,7 +130,6 @@ def save_df_csv(df:pd.DataFrame, name:str):
         Nome do que será atribuido ao arquivo .csv
     """
     df.to_csv(name + '.csv')
-
 
 
 
