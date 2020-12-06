@@ -9,7 +9,9 @@ importar módulo
 cnxn = db_connect.create_connection()
 cursor = cnxn.cursor()
 df = db_connect.create_df(tablename, cursor) -> tabelas disponíveis abaixo, retorna pd.DataFrame
+
 '''
+
 server = 'tcp:fgv-db-server.database.windows.net,1433'
 database = 'fgv-db'
 username = 'student'
@@ -62,15 +64,18 @@ password = '@dsInf123'
     # df = pd.DataFrame(values, columns=cols)
 class invalid_server_string_format(ValueError):
     """Exceção levantada quando a string com informações do server não está no formato adequado"""
+
     pass
 
 
 class invalid_server_port_value(ValueError):
     """Exceção levantada quando o valor para porta do server não é numérica"""
+
     pass
 
 class invalid_table_name(ValueError):
     """Exceção levantada quando é requisitada uma tabela que não existe no banco"""
+
     pass
 
 def create_connection(server:str, database:str, username:str, password:str) -> pyodbc.Connection:
@@ -90,7 +95,9 @@ def create_connection(server:str, database:str, username:str, password:str) -> p
     Returns
     -------
     pyodbc.Connection
+
     """
+
     if not (type(server)==str and type(server)==type(database) and type(server)==type(username) and type(username)==type(password)):
         raise TypeError('Todos os parametros devem ser no formato str()')
     if server[0:3]!='tcp' or server[-5] != ',':
@@ -116,7 +123,9 @@ def create_df(tablename:str, cursor:pyodbc.Cursor)->pd.DataFrame:
     -------
     pd.DataFrame
         DataFrame com dados do banco 
+
     """
+
     if type(tablename)!=str:
         raise TypeError
     if type(cursor) != pyodbc.Cursor:
@@ -145,6 +154,7 @@ def save_df_csv(df:pd.DataFrame, name:str):
 
     name : str
         Nome do que será atribuido ao arquivo .csv
+
     """
     if type(df)!=pd.DataFrame or type(name)!= str:
         raise TypeError
