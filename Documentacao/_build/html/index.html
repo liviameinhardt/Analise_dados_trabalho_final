@@ -1,0 +1,257 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Welcome to Análise’s documentation! &mdash; Análise 1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="#" class="icon icon-home" alt="Documentation Home"> Análise
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Welcome to Análise’s documentation!</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+</div>
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">Análise</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Welcome to Análise’s documentation!</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-Base_de_dados_conexoes_e_limpeza.db_connection">
+<span id="welcome-to-analise-s-documentation"></span><h1>Welcome to Análise’s documentation!<a class="headerlink" href="#module-Base_de_dados_conexoes_e_limpeza.db_connection" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="Base_de_dados_conexoes_e_limpeza.db_connection.create_connection">
+<code class="sig-prename descclassname">Base_de_dados_conexoes_e_limpeza.db_connection.</code><code class="sig-name descname">create_connection</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">server</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">database</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">username</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">password</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; pyodbc.Connection<a class="headerlink" href="#Base_de_dados_conexoes_e_limpeza.db_connection.create_connection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cria uma conexão com uma base de dados online</p>
+<dl class="simple">
+<dt>server<span class="classifier">str</span></dt><dd><p>String no formato ‘<a class="reference external" href="tcp:[link],[port">tcp:[link],[port</a>]’</p>
+</dd>
+<dt>database<span class="classifier">str</span></dt><dd><p>Nome da base de dados</p>
+</dd>
+<dt>username<span class="classifier">str</span></dt><dd><p>Nome de usuário</p>
+</dd>
+<dt>password<span class="classifier">str</span></dt><dd><p>Senha</p>
+</dd>
+</dl>
+<p>pyodbc.Connection</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="Base_de_dados_conexoes_e_limpeza.db_connection.create_df">
+<code class="sig-prename descclassname">Base_de_dados_conexoes_e_limpeza.db_connection.</code><code class="sig-name descname">create_df</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tablename</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">cursor</span><span class="p">:</span> <span class="n">pyodbc.Cursor</span></em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="headerlink" href="#Base_de_dados_conexoes_e_limpeza.db_connection.create_df" title="Permalink to this definition">¶</a></dt>
+<dd><p>A partir de um cursor e o nome de um tabela acessávl por esse cursor retorna um pd.DataFrame</p>
+<dl class="simple">
+<dt>tablename<span class="classifier">str</span></dt><dd><p>Nome da tabela presente no banco</p>
+</dd>
+</dl>
+<p>cursor : pyodbc.Cursor</p>
+<dl class="simple">
+<dt>pd.DataFrame</dt><dd><p>DataFrame com dados do banco</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="Base_de_dados_conexoes_e_limpeza.db_connection.save_df_csv">
+<code class="sig-prename descclassname">Base_de_dados_conexoes_e_limpeza.db_connection.</code><code class="sig-name descname">save_df_csv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span><span class="p">:</span> <span class="n">pandas.core.frame.DataFrame</span></em>, <em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Base_de_dados_conexoes_e_limpeza.db_connection.save_df_csv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Salva .csv a partir de um DataFrame</p>
+<dl class="simple">
+<dt>df<span class="classifier">pd.DataFrame</span></dt><dd><p>DataFrame para gerar o arquivo .csv</p>
+</dd>
+<dt>name<span class="classifier">str</span></dt><dd><p>Nome do que será atribuido ao arquivo .csv</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="toctree-wrapper compound">
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Luiz Luz
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
