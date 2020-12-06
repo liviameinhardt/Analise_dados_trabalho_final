@@ -5,7 +5,7 @@ import sys
 #sys.path.insert(0, os.path.abspath('..'))
 print('-------------------------------------------')
 
-#from Base_de_dados_conexoes_e_limpeza.db_connection import *
+from Base_de_dados_conexoes_e_limpeza.db_connection import *
 
 '''
 class testes_db_connection(unittest.TestCase):
