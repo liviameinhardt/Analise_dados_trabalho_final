@@ -1,8 +1,13 @@
 FEITO EM GRUPO
 
+-FIFA-
 Análise dos dados
+
 Salário x Habilidades - Modelo
+
+
 Análise das nacionalidades
+
 Nacionalidade x International_Reputation
 Melhor camisa por país
 	Separa por país - Pega n melhores jogadores - Vê camisa mais comum
@@ -24,3 +29,9 @@ Distribuição dos salários
 	- Imagens
 	- Goleiro
 	- Loaned_From
+
+
+-AEROPORTO-
+comparação da evolução países
+mais/menos afetados (aeroportos)
+maiores queda (país/estado)
