@@ -57,7 +57,26 @@ class testes_db_connection(unittest.TestCase):
             db_connection.create_connection(False, self.database, self.username, self.password)
             db_connection.create_connection(False, False, False, False)
             db_connection.create_connection(True, True, True, True)
+        
+        with self.assertRaises(pyodbc.InterfaceError):
+            #Senha errada
+            db_connection.create_connection(self.server, self.database, self.username, '@dsInf1234')
+            #Usuário errado
+            db_connection.create_connection(self.server, self.database, 'estudante', self.password)
+            #Senha e usuário errado
+            db_connection.create_connection(self.server, self.database, 'estudante', '@dsInf1234')
+            #Server database que não existe
+            db_connection.create_connection(self.server, 'BOMBA_PATCH.BOMBA_PATCH_2021_PLAYERS', self.username, self.password)
+            #database errada
+            db_connection.create_connection(self.server, 'ufrj-db', self.username, self.password)
 
+        with self.assertRaises(pyodbc.OperationalError):
+            #Porta Errada
+            db_connection.create_connection('tcp:fgv-db-server.database.windows.net,5123', self.database, self.username, self.password)
+            #tcp errado
+            db_connection.create_connection('tcp:puc-db-server.database.windows.net,1433', self.database, self.username, self.password)
+        
+        
         
     
     def testando_parametros_da_create_df(self):
@@ -92,6 +111,7 @@ class testes_db_connection(unittest.TestCase):
             db_connection.save_df_csv(123,dict(1,2))
             db_connection.save_df_csv('nome_do_arquivo',(1,2))
             db_connection.save_df_csv(pd.DataFrame([[1,2,3,4],[5,6,7,8]]), [1,2,3])
+
 
 
 
