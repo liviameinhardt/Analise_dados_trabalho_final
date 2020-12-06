@@ -61,12 +61,42 @@ password = '@dsInf123'
     # values = [list(rows[i]) for i in range(len(rows))] -> list of lists
     # df = pd.DataFrame(values, columns=cols)
 
-def create_connection(server, database, username, password):
+def create_connection(server:str, database:str, username:str, password:str) -> pyodbc.Connection:
+    """Cria uma conexão com uma base de dados online
+
+    Parameters
+    ----------
+    server : str
+        String no formato 'tcp:[link],[port]'
+    database : str
+        Nome da base de dados
+    username : str
+        Nome de usuário
+    password : str
+        Senha
+
+    Returns
+    -------
+    pyodbc.Connection
+    """
     cnxn_string = f'DRIVER=ODBC Driver 17 for SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password};'
     cnxn = pyodbc.connect(cnxn_string)
     return cnxn
 
-def create_df(tablename, cursor):
+def create_df(tablename:str, cursor:pyodbc.Cursor)->pd.DataFrame:
+    """A partir de um cursor e o nome de um tabela acessávl por esse cursor retorna um pd.DataFrame
+
+    Parameters
+    ----------
+    tablename : str
+        Nome da tabela presente no banco
+    cursor : pyodbc.Cursor
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame com dados do banco 
+    """
     query = f'SELECT * FROM {tablename};'
     cursor.execute(query)
     rows = cursor.fetchall()
@@ -76,6 +106,18 @@ def create_df(tablename, cursor):
     return df
 
 def save_df_csv(df:pd.DataFrame, name:str):
+    """Salva .csv a partir de um DataFrame
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        DataFrame para gerar o arquivo .csv
+
+    name : str
+        Nome do que será atribuido ao arquivo .csv
+    """
     df.to_csv(name + '.csv')
+
+
 
 
