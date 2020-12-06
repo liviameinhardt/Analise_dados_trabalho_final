@@ -95,6 +95,7 @@ def create_connection(server:str, database:str, username:str, password:str) -> p
     return cnxn
 
 
+
 def create_df(tablename:str, cursor:pyodbc.Connection.cursor)->pd.DataFrame:
     """A partir de um cursor e o nome de um tabela acessável por esse cursor retorna um pd.DataFrame
 
