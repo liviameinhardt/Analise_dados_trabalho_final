@@ -28,7 +28,7 @@ class testes_db_connection(unittest.TestCase):
     def tearDown(self):
         print('tearDown\n')
 
-    def testando_parametros_do_create_conection(self):
+    def testando_parametros_da_create_conection(self):
         print('test_create_connection')
         connection_class = db_connection.create_connection(self.server, self.database, self.username, self.password)
         self.assertIsInstance(connection_class, pyodbc.Connection)
@@ -60,7 +60,7 @@ class testes_db_connection(unittest.TestCase):
 
         
     
-    def testando_parametros_do_create_df(self):
+    def testando_parametros_da_create_df(self):
         print('testando_parametros_do_create_df')
         connection_class = db_connection.create_connection(self.server, self.database, self.username, self.password)
         cursor = connection_class.cursor()
@@ -78,21 +78,22 @@ class testes_db_connection(unittest.TestCase):
             db_connection.create_df(tuple('fifa_player'), cursor)
             db_connection.create_df(1234,1234)
             db_connection.create_df(['fifa.fifa_player'],'pyodbc.Cursor')
+
         with self.assertRaises(db_connection.invalid_table_name):
             db_connection.create_df('PES.PES_player',cursor)
             db_connection.create_df('Bomba_Patch2021.Bomba_Patch_player',cursor)
             db_connection.create_df('wwe.ufc_upcoming_event',cursor)
             db_connection.create_df('ufc.xfactor_most_recent_event',cursor)
             db_connection.create_df('covid.covid_impact_on_aeroporto_traffic',cursor)
-            
-            
-            
+
+    def testando_parametros_da_save_df_csv(self):
+        with self.assertRaises(TypeError):
+            db_connection.save_df_csv(123,'test')
+            db_connection.save_df_csv(123,dict(1,2))
+            db_connection.save_df_csv('nome_do_arquivo',(1,2))
+            db_connection.save_df_csv(pd.DataFrame([[1,2,3,4],[5,6,7,8]]), [1,2,3])
 
 
-
-    
-        
-    
 
 if __name__ == '__main__':
     unittest.main()
