@@ -61,12 +61,16 @@ password = '@dsInf123'
     # values = [list(rows[i]) for i in range(len(rows))] -> list of lists
     # df = pd.DataFrame(values, columns=cols)
 class invalid_server_string_format(ValueError):
+    """Exceção levantada quando a string com informações do server não está no formato adequado"""
     pass
 
+
 class invalid_server_port_value(ValueError):
+    """Exceção levantada quando o valor para porta do server não é numérica"""
     pass
 
 class invalid_table_name(ValueError):
+    """Exceção levantada quando é requisitada uma tabela que não existe no banco"""
     pass
 
 def create_connection(server:str, database:str, username:str, password:str) -> pyodbc.Connection:
