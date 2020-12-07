@@ -1,3 +1,4 @@
+#%%
 import pandas  as pd
 import pyodbc
 '''
@@ -8,7 +9,9 @@ importar módulo
 cnxn = db_connect.create_connection()
 cursor = cnxn.cursor()
 df = db_connect.create_df(tablename, cursor) -> tabelas disponíveis abaixo, retorna pd.DataFrame
+
 '''
+
 server = 'tcp:fgv-db-server.database.windows.net,1433'
 database = 'fgv-db'
 username = 'student'
@@ -60,9 +63,19 @@ password = '@dsInf123'
     # values = [list(rows[i]) for i in range(len(rows))] -> list of lists
     # df = pd.DataFrame(values, columns=cols)
 class invalid_server_string_format(ValueError):
+    """Exceção levantada quando a string com informações do server não está no formato adequado"""
+
     pass
 
+
 class invalid_server_port_value(ValueError):
+    """Exceção levantada quando o valor para porta do server não é numérica"""
+
+    pass
+
+class invalid_table_name(ValueError):
+    """Exceção levantada quando é requisitada uma tabela que não existe no banco"""
+
     pass
 
 def create_connection(server:str, database:str, username:str, password:str) -> pyodbc.Connection:
@@ -82,7 +95,9 @@ def create_connection(server:str, database:str, username:str, password:str) -> p
     Returns
     -------
     pyodbc.Connection
+
     """
+
     if not (type(server)==str and type(server)==type(database) and type(server)==type(username) and type(username)==type(password)):
         raise TypeError('Todos os parametros devem ser no formato str()')
     if server[0:3]!='tcp' or server[-5] != ',':
@@ -95,21 +110,32 @@ def create_connection(server:str, database:str, username:str, password:str) -> p
     return cnxn
 
 
-
-def create_df(tablename:str, cursor:pyodbc.Connection.cursor)->pd.DataFrame:
+def create_df(tablename:str, cursor:pyodbc.Cursor)->pd.DataFrame:
     """A partir de um cursor e o nome de um tabela acessável por esse cursor retorna um pd.DataFrame
 
     Parameters
     ----------
     tablename : str
         Nome da tabela presente no banco
-    cursor : pyodbc.Connection.cursor
+    cursor : pyodbc.Cursor
 
     Returns
     -------
     pd.DataFrame
         DataFrame com dados do banco 
+
     """
+
+    if type(tablename)!=str:
+        raise TypeError
+    if type(cursor) != pyodbc.Cursor:
+        raise TypeError
+
+    table_names = [str(name[1])+'.'+str(name[2]) for name in cursor.tables(tableType='Table').fetchall()]
+
+    if not(tablename in table_names):
+        raise invalid_table_name
+
     query = f'SELECT * FROM {tablename};'
     cursor.execute(query)
     rows = cursor.fetchall()
@@ -128,8 +154,11 @@ def save_df_csv(df:pd.DataFrame, name:str):
 
     name : str
         Nome do que será atribuido ao arquivo .csv
-    """
-    df.to_csv(name + '.csv')
 
+    """
+    if type(df)!=pd.DataFrame or type(name)!= str:
+        raise TypeError
+
+    df.to_csv(name + '.csv')
 
 

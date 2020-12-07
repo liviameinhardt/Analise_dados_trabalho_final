@@ -171,7 +171,7 @@
 <dl class="py function">
 <dt id="Base_de_dados_conexoes_e_limpeza.db_connection.create_df">
 <code class="sig-prename descclassname">Base_de_dados_conexoes_e_limpeza.db_connection.</code><code class="sig-name descname">create_df</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tablename</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">cursor</span><span class="p">:</span> <span class="n">pyodbc.Cursor</span></em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="headerlink" href="#Base_de_dados_conexoes_e_limpeza.db_connection.create_df" title="Permalink to this definition">¶</a></dt>
-<dd><p>A partir de um cursor e o nome de um tabela acessávl por esse cursor retorna um pd.DataFrame</p>
+<dd><p>A partir de um cursor e o nome de um tabela acessável por esse cursor retorna um pd.DataFrame</p>
 <dl class="simple">
 <dt>tablename<span class="classifier">str</span></dt><dd><p>Nome da tabela presente no banco</p>
 </dd>
@@ -181,6 +181,24 @@
 <dt>pd.DataFrame</dt><dd><p>DataFrame com dados do banco</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="Base_de_dados_conexoes_e_limpeza.db_connection.invalid_server_port_value">
+<em class="property">exception </em><code class="sig-prename descclassname">Base_de_dados_conexoes_e_limpeza.db_connection.</code><code class="sig-name descname">invalid_server_port_value</code><a class="headerlink" href="#Base_de_dados_conexoes_e_limpeza.db_connection.invalid_server_port_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exceção levantada quando o valor para porta do server não é numérica</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="Base_de_dados_conexoes_e_limpeza.db_connection.invalid_server_string_format">
+<em class="property">exception </em><code class="sig-prename descclassname">Base_de_dados_conexoes_e_limpeza.db_connection.</code><code class="sig-name descname">invalid_server_string_format</code><a class="headerlink" href="#Base_de_dados_conexoes_e_limpeza.db_connection.invalid_server_string_format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exceção levantada quando a string com informações do server não está no formato adequado</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="Base_de_dados_conexoes_e_limpeza.db_connection.invalid_table_name">
+<em class="property">exception </em><code class="sig-prename descclassname">Base_de_dados_conexoes_e_limpeza.db_connection.</code><code class="sig-name descname">invalid_table_name</code><a class="headerlink" href="#Base_de_dados_conexoes_e_limpeza.db_connection.invalid_table_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exceção levantada quando é requisitada uma tabela que não existe no banco</p>
 </dd></dl>
 
 <dl class="py function">
