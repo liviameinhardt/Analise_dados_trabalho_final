@@ -3,7 +3,7 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-df = pd.read_csv("../Dados/fifa_players.csv")
+df = pd.read_csv("../Dados/fifa_players_clean.csv")
 
 #analise incial
 # print(df.head())
@@ -16,10 +16,12 @@ geral = list(df.columns)[2:21] +  list(df.columns)[-1:]
 posicao = list(df.columns)[21:47]
 habilidades = list(df.columns)[48:-1]
 
-#mapa de calor da correlação (tudo)
+# #mapa de calor da correlação (tudo)
 # plt.rcParams['figure.figsize'] = (30, 20)
 # sns.heatmap(df.corr(), annot = True)
 # plt.show()
+
+
 
 # #mapa de calor da correlação (características gerais)
 # plt.rcParams['figure.figsize'] = (30, 20)

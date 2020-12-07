@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 from matplotlib.dates import DateFormatter
 
-df = pd.read_csv("../Dados/covid_airport.csv")
+df = pd.read_csv("../Dados/covid_airport_clean.csv")
 
 # analise inicial   
 # print(df.head())
