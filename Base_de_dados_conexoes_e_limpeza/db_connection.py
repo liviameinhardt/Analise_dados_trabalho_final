@@ -12,6 +12,7 @@ df = db_connect.Conexao.create_df(tablename, cursor) -> tabelas disponíveis aba
 '''
 
 class Conexao:
+    """Métodos para necessários para a conexão com servidor SQl"""
 
     server = 'tcp:fgv-db-server.database.windows.net,1433'
     database = 'fgv-db'
@@ -37,8 +38,16 @@ class Conexao:
         -------
         pyodbc.Connection
 
+        Raises
+        ------
+        TypeError
+            Quando os parâmetros não são Strings
+        invalid_server_string_format
+            Quando a string não obedece o padrão 'tcp:**nome do banco**, **número da porta do servidor**'
+        invalid_server_port_value
+            Quando a porta do servidor não está compatível com servidor
         """
-
+    
         if server is None:
             server = cls.server
         if database is None:
@@ -67,7 +76,9 @@ class Conexao:
         ----------
         tablename : str
             Nome da tabela presente no banco
+        
         cursor : pyodbc.Cursor
+            Cursor obtido a partir da conexão com o server
 
         Returns
         -------
@@ -77,9 +88,9 @@ class Conexao:
         """
 
         if type(tablename)!=str:
-            raise TypeError
+            raise TypeError('type(tablename)!=str:')
         if type(cursor) != pyodbc.Cursor:
-            raise TypeError
+            raise TypeError('type(cursor) != pyodbc.Cursor:')
 
         table_names = [str(name[1])+'.'+str(name[2]) for name in cursor.tables(tableType='Table').fetchall()]
 
@@ -105,6 +116,8 @@ class Conexao:
 
         name : str
             Nome do que será atribuido ao arquivo .csv
+
+        Raises
 
         """
         if type(df)!=pd.DataFrame or type(name)!= str:
