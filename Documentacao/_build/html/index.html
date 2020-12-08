@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Welcome to Análise’s documentation! &mdash; Análise 1.0 documentation</title>
+  <title>Módulos e Métodos para Conexão &mdash; Análise 1.0 documentation</title>
   
 
   
@@ -82,7 +82,16 @@
             
               <!-- Local TOC -->
               <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">Welcome to Análise’s documentation!</a></li>
+<li><a class="reference internal" href="#">Módulos e Métodos para Conexão</a><ul>
+<li><a class="reference internal" href="#excecoes-especificas-do-modulo">Exceções específicas do módulo</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modulos-e-metodos-para-limpeza">Módulos e Métodos para Limpeza</a><ul>
+<li><a class="reference internal" href="#limpeza-dos-dados-covid-airport">Limpeza dos Dados covid_airport</a></li>
+<li><a class="reference internal" href="#limpeza-dos-dados-fifa-players">Limpeza dos Dados fifa_players</a></li>
+<li><a class="reference internal" href="#id3">Exceções específicas do módulo</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
 </div>
@@ -130,7 +139,7 @@
     
       <li><a href="#" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Welcome to Análise’s documentation!</li>
+      <li>Módulos e Métodos para Conexão</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -150,7 +159,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="module-Base_de_dados_conexoes_e_limpeza.db_connection">
-<span id="welcome-to-analise-s-documentation"></span><h1>Welcome to Análise’s documentation!<a class="headerlink" href="#module-Base_de_dados_conexoes_e_limpeza.db_connection" title="Permalink to this headline">¶</a></h1>
+<span id="modulos-e-metodos-para-conexao"></span><h1>Módulos e Métodos para Conexão<a class="headerlink" href="#module-Base_de_dados_conexoes_e_limpeza.db_connection" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="Base_de_dados_conexoes_e_limpeza.db_connection.Conexao">
 <em class="property">class </em><code class="sig-prename descclassname">Base_de_dados_conexoes_e_limpeza.db_connection.</code><code class="sig-name descname">Conexao</code><a class="headerlink" href="#Base_de_dados_conexoes_e_limpeza.db_connection.Conexao" title="Permalink to this definition">¶</a></dt>
@@ -229,7 +238,33 @@
 <dd><p>Exceção levantada quando é requisitada uma tabela que não existe no banco</p>
 </dd></dl>
 
-<span class="target" id="module-Base_de_dados_conexoes_e_limpeza.db_cleaning"></span><dl class="py class">
+<div class="section" id="excecoes-especificas-do-modulo">
+<h2>Exceções específicas do módulo<a class="headerlink" href="#excecoes-especificas-do-modulo" title="Permalink to this headline">¶</a></h2>
+<dl class="py exception">
+<dt id="id0">
+<em class="property">exception </em><code class="sig-prename descclassname">Base_de_dados_conexoes_e_limpeza.db_connection.</code><code class="sig-name descname">invalid_server_string_format</code><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exceção levantada quando a string com informações do server não está no formato adequado</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="id1">
+<em class="property">exception </em><code class="sig-prename descclassname">Base_de_dados_conexoes_e_limpeza.db_connection.</code><code class="sig-name descname">invalid_server_port_value</code><a class="headerlink" href="#id1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exceção levantada quando o valor para porta do server não é numérica</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="id2">
+<em class="property">exception </em><code class="sig-prename descclassname">Base_de_dados_conexoes_e_limpeza.db_connection.</code><code class="sig-name descname">invalid_table_name</code><a class="headerlink" href="#id2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exceção levantada quando é requisitada uma tabela que não existe no banco</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="modulos-e-metodos-para-limpeza">
+<h1>Módulos e Métodos para Limpeza<a class="headerlink" href="#modulos-e-metodos-para-limpeza" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="limpeza-dos-dados-covid-airport">
+<h2>Limpeza dos Dados covid_airport<a class="headerlink" href="#limpeza-dos-dados-covid-airport" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
 <dt id="Base_de_dados_conexoes_e_limpeza.db_cleaning.Limpador_airport">
 <em class="property">class </em><code class="sig-prename descclassname">Base_de_dados_conexoes_e_limpeza.db_cleaning.</code><code class="sig-name descname">Limpador_airport</code><a class="headerlink" href="#Base_de_dados_conexoes_e_limpeza.db_cleaning.Limpador_airport" title="Permalink to this definition">¶</a></dt>
 <dd><p>Métodos necessários para a limpeza do covid_airports dataset</p>
@@ -291,6 +326,9 @@
 
 </dd></dl>
 
+</div>
+<div class="section" id="limpeza-dos-dados-fifa-players">
+<h2>Limpeza dos Dados fifa_players<a class="headerlink" href="#limpeza-dos-dados-fifa-players" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="Base_de_dados_conexoes_e_limpeza.db_cleaning.Limpador_fifa">
 <em class="property">class </em><code class="sig-prename descclassname">Base_de_dados_conexoes_e_limpeza.db_cleaning.</code><code class="sig-name descname">Limpador_fifa</code><a class="headerlink" href="#Base_de_dados_conexoes_e_limpeza.db_cleaning.Limpador_fifa" title="Permalink to this definition">¶</a></dt>
@@ -514,13 +552,17 @@ DataFrame com coluna ‘Preferred_Foot’ com valor 1 para Right e 0 para Left.<
 
 </dd></dl>
 
+</div>
+<div class="section" id="id3">
+<h2>Exceções específicas do módulo<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <dl class="py exception">
 <dt id="Base_de_dados_conexoes_e_limpeza.db_cleaning.indexes_not_found_in_dataframe">
 <em class="property">exception </em><code class="sig-prename descclassname">Base_de_dados_conexoes_e_limpeza.db_cleaning.</code><code class="sig-name descname">indexes_not_found_in_dataframe</code><a class="headerlink" href="#Base_de_dados_conexoes_e_limpeza.db_cleaning.indexes_not_found_in_dataframe" title="Permalink to this definition">¶</a></dt>
-<dd><p>Exceção levantada quando não existem no DataFrame as colunas que seriam tratadas</p>
+<dd><p>Exceção levantada quando as colunas que seriam tratadas não existem no DataFrame</p>
 </dd></dl>
 
 <div class="toctree-wrapper compound">
+</div>
 </div>
 </div>
 <div class="section" id="indices-and-tables">
