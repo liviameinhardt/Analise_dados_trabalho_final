@@ -24,15 +24,14 @@ class testes_Limpador_fifa(unittest.TestCase):
     def tearDown(self):
         print('tearDown\n')
 
-    def testando_parametros_da_drop_cols(self):
-        print('testando_parametros_da_drop_cols')
-        #Caminho feliz
+    def testando_instancia_e_valores_retornados_pela_drop_cols(self):
+        print('testando_instancia_e_valores_retornados_pela_drop_cols')
         self.assertIsInstance(Limpador_fifa.drop_cols(self.df), pd.DataFrame)
-
         df1=pd.DataFrame([[9,10,1,2,3,4,5,6,7,8]], columns=['Name','Age','Unnamed: 0', 'Counter', 'Photo', 'Flag', 'Club_Logo', 'Loaned_From', 'Real_Face', 'Work_Rate'])
         pd.testing.assert_frame_equal(Limpador_fifa.drop_cols(df1),pd.DataFrame([[9,10]], columns=['Name','Age']))
         
-
+    def testando_excecoes_levantadas_pela_drop_cols(self):
+        print('testando_excecoes_levantadas_pela_drop_cols')
         with self.assertRaises(TypeError):
             Limpador_fifa.drop_cols([[1,2,3,4],[4,5,6,7]])
             Limpador_fifa.drop_cols(dict(oi= 1,tudo=2,bem=3))
@@ -43,9 +42,8 @@ class testes_Limpador_fifa(unittest.TestCase):
         with self.assertRaises(indexes_not_found_in_dataframe):
             Limpador_fifa.drop_cols(self.df_to_test_index)
 
-    def testando_parametros_da_drop_na_pos(self):
-        print('testando_parametros_da_drop_na_pos')
-        #Caminho feliz
+    def testando_instancia_retornada_pela_drop_na_pos(self):
+        print('testando_instancia_retornada_pela_drop_na_pos')
         self.assertIsInstance(Limpador_fifa.drop_na_pos(self.df),pd.DataFrame)
         with self.assertRaises(TypeError):
             Limpador_fifa.drop_na_pos([[1,2,3,4],[4,5,6,7]])
@@ -249,6 +247,7 @@ class testes_Limpador_fifa(unittest.TestCase):
         print('testando_parametros_da_foot_to_dummie')
         #Caminho feliz
         self.assertIsInstance(Limpador_fifa.foot_to_dummie(self.df), pd.DataFrame)
+
         with self.assertRaises(TypeError):
             Limpador_fifa.foot_to_dummie([[1,2,3,4],[4,5,6,7]])
             Limpador_fifa.foot_to_dummie(dict(oi= 1,tudo=2,bem=3))
@@ -272,7 +271,6 @@ class testes_Limpador_fifa(unittest.TestCase):
             Limpador_fifa.clean_dataframe('String')
             Limpador_fifa.clean_dataframe(50.5)
 
-    
 
 
 class testes_Limpador_ariport(unittest.TestCase):
@@ -297,6 +295,10 @@ class testes_Limpador_ariport(unittest.TestCase):
     def testando_parametros_drop_cols(self):
         print('testando_parametros_drop_cols')
         self.assertIsInstance(Limpador_airport.drop_cols(self.df), pd.DataFrame)
+
+        df1=pd.DataFrame([[9,10,1,2,3,4,5]], columns=['Name','Age','AggregationMethod', 'Unnamed: 0', 'Version', 'Centroid', 'Geography'])
+        pd.testing.assert_frame_equal(Limpador_airport.drop_cols(df1),pd.DataFrame([[9,10]], columns=['Name','Age']))
+
         with self.assertRaises(TypeError):
             Limpador_airport.drop_cols([[1,2,3,4],[4,5,6,7]])
             Limpador_airport.drop_cols(dict(oi= 1,tudo=2,bem=3))
@@ -322,6 +324,10 @@ class testes_Limpador_ariport(unittest.TestCase):
     def testando_parametros_standardize_country_names(self):
         print('testando_parametros_standardize_country_names')
         self.assertIsInstance(Limpador_airport.standardize_country_names(self.df), pd.DataFrame)
+
+        df1=pd.DataFrame([['United States of America (the)'],['United States']], columns=['Country'])
+        pd.testing.assert_frame_equal(Limpador_airport.standardize_country_names(df1),pd.DataFrame([['United States'],['United States']], columns=['Country']))
+
         with self.assertRaises(TypeError):
             Limpador_airport.standardize_country_names([[1,2,3,4],[4,5,6,7]])
             Limpador_airport.standardize_country_names(dict(oi= 1,tudo=2,bem=3))
