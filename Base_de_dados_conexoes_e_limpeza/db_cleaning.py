@@ -16,6 +16,11 @@ class Limpador_airport:
             DataFrame sem as colunas 'AggregationMethod', 'Unnamed: 0', 'Version', 'Centroid', 'Geography'
         """
         columns={'AggregationMethod', 'Unnamed: 0', 'Version', 'Centroid', 'Geography'}
+        if type(df) != pd.DataFrame:
+            raise TypeError
+
+        if not (set(df.columns).issuperset(columns)):
+            raise indexes_not_found_in_dataframe
         df.drop(columns=columns, inplace=True)
         return df
 
@@ -34,6 +39,12 @@ class Limpador_airport:
             DataFrame com a coluna Date, Year, Month, Day no formato datetime
             
         """
+        if type(df) != pd.DataFrame:
+            raise TypeError
+    
+        columns = {'Date'}
+        if not (set(df.columns).issuperset(columns)):
+            raise indexes_not_found_in_dataframe
 
         df.loc[:, 'Date'] = pd.to_datetime(df['Date'])
         df.loc[:, 'Year'] = df['Date'].dt.year
@@ -56,6 +67,13 @@ class Limpador_airport:
             Dataframe com a coluna Country com 'United States' em referência ao país
 
         """
+        columns = {'Country'}
+
+        if type(df) != pd.DataFrame:
+            raise TypeError
+
+        if not (set(df.columns).issuperset(columns)):
+            raise indexes_not_found_in_dataframe
 
         df = df.copy()
         df.loc[:, 'Country'].replace('United States of America (the)', 'United States', inplace=True)
@@ -63,16 +81,18 @@ class Limpador_airport:
 
     @classmethod
     def clean_dataframe(cls, df:pd.DataFrame) -> pd.DataFrame:
-        """Faz a limpeza necessária para a análise dos dados
+        """Limpa os dados para permitir a análise.
 
         Parameters
         ----------
         df : pd.DataFrame
+            DataFrame com o dataset covid_airport original.
 
         Returns
         -------
         pd.DataFrame
-            
+            DataFrame com os dados do covid_airport limpos.
+
         """
         df = cls.drop_cols(df.copy())
         df = cls.create_datetime_cols(df.copy())
@@ -417,6 +437,12 @@ class Limpador_fifa:
         df = cls.adjust_dtypes(df.copy())
         df = cls.foot_to_dummie(df.copy())
         return df
+
+class indexes_not_found_in_dataframe(pd.errors.InvalidIndexError):
+    """ Exceção levantada quando não existem no DataFrame as colunas que seriam tratadas"""
+    pass
+
+
 
 if __name__ == '__main__':
     df = pd.read_csv('../Dados/fifa_players.csv')
