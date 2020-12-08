@@ -48,7 +48,6 @@ class testes_Limpador_fifa(unittest.TestCase):
             Limpador_fifa.drop_na_pos(tuple(1,2,3,4))
             Limpador_fifa.drop_na_pos('String')
             Limpador_fifa.drop_na_pos(50.5)
-
         
     def testando_parametros_da_drop_na_ReleaseClause(self):
         print('testando_parametros_da_drop_na_ReleaseClause')
@@ -77,7 +76,6 @@ class testes_Limpador_fifa(unittest.TestCase):
 
         with self.assertRaises(indexes_not_found_in_dataframe):
             Limpador_fifa.set_index(self.df_to_test_index)
-
         
     def testando_parametros_da_remove_plus_sign(self):
         print('testando_parametros_da_remove_plus_sign')
@@ -108,9 +106,6 @@ class testes_Limpador_fifa(unittest.TestCase):
             Limpador_fifa.clean_position_cols('String')
             Limpador_fifa.clean_position_cols(50.5)
         
-
-
-
     def testando_parametros_da_money_to_int(self):
         print('testando_parametros_da_money_to_int')
         #Caminho feliz
@@ -132,8 +127,6 @@ class testes_Limpador_fifa(unittest.TestCase):
             Limpador_fifa.remove_plus_sign(pd.NA)
             Limpador_fifa.remove_plus_sign(nan)
         
-
-
     def testando_parametros_clean_money_cols(self):
         print('testando_parametros_clean_money_cols')
         #Caminho feliz
@@ -148,7 +141,6 @@ class testes_Limpador_fifa(unittest.TestCase):
         
         with self.assertRaises(indexes_not_found_in_dataframe):
             Limpador_fifa.clean_money_cols(self.df_to_test_index)
-
 
     def testando_parametros_da_lbs_to_kg(self):
         print('testando_parametros_da_lbs_to_kg')
@@ -183,7 +175,6 @@ class testes_Limpador_fifa(unittest.TestCase):
         with self.assertRaises(indexes_not_found_in_dataframe):
             Limpador_fifa.clean_weight_col(self.df_to_test_index)
 
-
     def testando_parametros_da_ft_to_meters(self):
         print('testando_parametros_da_ft_to_meters')
         #Caminho feliz
@@ -202,7 +193,6 @@ class testes_Limpador_fifa(unittest.TestCase):
             Limpador_fifa.ft_to_meters(pd.NA)
             Limpador_fifa.ft_to_meters(nan)
 
-    
     def testando_parametros_da_clean_height_col(self):
         print('testando_parametros_da_clean_height_col')
         #Caminho feliz
@@ -217,7 +207,6 @@ class testes_Limpador_fifa(unittest.TestCase):
         
         with self.assertRaises(indexes_not_found_in_dataframe):
             Limpador_fifa.clean_height_col(self.df_to_test_index)
-
     
     def testando_parametros_da_adjust_dtypes(self):
         print('testando_parametros_da_adjust_dtypes')
@@ -252,7 +241,7 @@ class testes_Limpador_fifa(unittest.TestCase):
     def testando_parametros_da_clean_dataframe(self):
         print('testando_parametros_da_clean_dataframe')
         #Caminho feliz
-        Limpador_fifa.clean_dataframe(self.df)
+        self.assertIsInstance(Limpador_fifa.clean_dataframe(self.df), pd.DataFrame)
         with self.assertRaises(TypeError):
             Limpador_fifa.clean_dataframe([[1,2,3,4],[4,5,6,7]])
             Limpador_fifa.clean_dataframe(dict(oi= 1,tudo=2,bem=3))
