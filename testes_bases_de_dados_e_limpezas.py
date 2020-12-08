@@ -28,6 +28,11 @@ class testes_Limpador_fifa(unittest.TestCase):
         print('testando_parametros_da_drop_cols')
         #Caminho feliz
         self.assertIsInstance(Limpador_fifa.drop_cols(self.df), pd.DataFrame)
+
+        df1=pd.DataFrame([[9,10,1,2,3,4,5,6,7,8]], columns=['Name','Age','Unnamed: 0', 'Counter', 'Photo', 'Flag', 'Club_Logo', 'Loaned_From', 'Real_Face', 'Work_Rate'])
+        pd.testing.assert_frame_equal(Limpador_fifa.drop_cols(df1),pd.DataFrame([[9,10]], columns=['Name','Age']))
+        
+
         with self.assertRaises(TypeError):
             Limpador_fifa.drop_cols([[1,2,3,4],[4,5,6,7]])
             Limpador_fifa.drop_cols(dict(oi= 1,tudo=2,bem=3))
@@ -53,6 +58,10 @@ class testes_Limpador_fifa(unittest.TestCase):
         print('testando_parametros_da_drop_na_ReleaseClause')
         #Caminho feliz
         self.assertIsInstance(Limpador_fifa.drop_na_ReleaseClause(self.df), pd.DataFrame)
+
+        df1=pd.DataFrame([[9.0],[10.0], [math_nan], [float('nan')]], columns=['Release_Clause'])
+        pd.testing.assert_frame_equal(Limpador_fifa.drop_na_ReleaseClause(df1),pd.DataFrame([[9.0],[10.0]], columns=['Release_Clause']))
+
         with self.assertRaises(TypeError):
             Limpador_fifa.drop_na_ReleaseClause([[1,2,3,4],[4,5,6,7]])
             Limpador_fifa.drop_na_ReleaseClause(dict(oi= 1,tudo=2,bem=3))
@@ -67,6 +76,7 @@ class testes_Limpador_fifa(unittest.TestCase):
         print('testando_parametros_da_set_index')
         #Caminho feliz
         self.assertIsInstance(Limpador_fifa.set_index(self.df),pd.DataFrame)
+
         with self.assertRaises(TypeError):
             Limpador_fifa.set_index([[1,2,3,4],[4,5,6,7]])
             Limpador_fifa.set_index(dict(oi= 1,tudo=2,bem=3))
@@ -132,6 +142,10 @@ class testes_Limpador_fifa(unittest.TestCase):
         #Caminho feliz
         df = Limpador_fifa.drop_na_ReleaseClause(self.df)
         self.assertIsInstance(Limpador_fifa.clean_money_cols(df), pd.DataFrame)
+
+        df1=pd.DataFrame([['€1K','€2K','€3K']], columns=['Value', 'Wage', 'Release_Clause'])
+        pd.testing.assert_frame_equal(Limpador_fifa.clean_money_cols(df1),pd.DataFrame([[1000.0, 2000.0, 3000.0]], columns=['Value', 'Wage', 'Release_Clause']))
+
         with self.assertRaises(TypeError):
             Limpador_fifa.clean_money_cols([[1,2,3,4],[4,5,6,7]])
             Limpador_fifa.clean_money_cols(dict(oi= 1,tudo=2,bem=3))
@@ -166,6 +180,10 @@ class testes_Limpador_fifa(unittest.TestCase):
         #Caminho feliz
         df = Limpador_fifa.drop_na_pos(self.df)
         self.assertIsInstance(Limpador_fifa.clean_weight_col(df),pd.DataFrame)
+
+        df1=pd.DataFrame([["6'0",'50lbs']], columns=['Height', 'Weight'])
+        pd.testing.assert_frame_equal(Limpador_fifa.clean_weight_col(df1),pd.DataFrame([["6'0", 23.0]], columns=['Height', 'Weight']))
+
         with self.assertRaises(TypeError):
             Limpador_fifa.clean_weight_col([[1,2,3,4],[4,5,6,7]])
             Limpador_fifa.clean_weight_col(dict(oi= 1,tudo=2,bem=3))
@@ -198,6 +216,10 @@ class testes_Limpador_fifa(unittest.TestCase):
         #Caminho feliz
         df = Limpador_fifa.drop_na_pos(self.df)
         self.assertIsInstance(Limpador_fifa.clean_height_col(df),pd.DataFrame)
+
+        df1=pd.DataFrame([["6'0",'50lbs']], columns=['Height', 'Weight'])
+        pd.testing.assert_frame_equal(Limpador_fifa.clean_height_col(df1),pd.DataFrame([[1.83, '50lbs']], columns=['Height', 'Weight']))
+
         with self.assertRaises(TypeError):
             Limpador_fifa.clean_height_col([[1,2,3,4],[4,5,6,7]])
             Limpador_fifa.clean_height_col(dict(oi= 1,tudo=2,bem=3))
@@ -242,6 +264,7 @@ class testes_Limpador_fifa(unittest.TestCase):
         print('testando_parametros_da_clean_dataframe')
         #Caminho feliz
         self.assertIsInstance(Limpador_fifa.clean_dataframe(self.df), pd.DataFrame)
+        
         with self.assertRaises(TypeError):
             Limpador_fifa.clean_dataframe([[1,2,3,4],[4,5,6,7]])
             Limpador_fifa.clean_dataframe(dict(oi= 1,tudo=2,bem=3))
