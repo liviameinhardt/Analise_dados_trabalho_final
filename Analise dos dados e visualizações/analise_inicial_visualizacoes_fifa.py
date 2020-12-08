@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 df = pd.read_csv("../Dados/fifa_players_clean.csv")
 
-#analise incial
+# analise incial
 # print(df.head())
 # print(df.info())
 
