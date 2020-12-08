@@ -17,7 +17,7 @@ class testes_Limpador_fifa(unittest.TestCase):
 
     def setUp(self):
         print('setUp')
-        self.df = pd.read_csv('F:/Documentos/Estudos/Disciplinas FGV/Linguagens de Programação/Trabalho_Final_LP/Dados/fifa_players_dirty.csv')
+        self.df = pd.read_csv('F:/Documentos/Estudos/Disciplinas FGV/Trabalho_Final_LP/Dados/fifa_players.csv')
         self.df_to_test_index=pd.DataFrame([['Ari', 20], ['João', 19], ['Livia', 18],['Luiz',19]],
                                             columns = ['Name1', 'Age']) 
         
@@ -91,7 +91,10 @@ class testes_Limpador_fifa(unittest.TestCase):
             Limpador_fifa.remove_plus_sign(dict(oi= 1,tudo=2,bem=3))
             Limpador_fifa.remove_plus_sign(tuple(1,2,3,4))
             Limpador_fifa.remove_plus_sign(50.5)
-
+        with self.assertRaises(pd.errors.NullFrequencyError):
+            Limpador_fifa.remove_plus_sign(float('nan'))
+            Limpador_fifa.remove_plus_sign(pd.NA)
+            Limpador_fifa.remove_plus_sign(nan)
 
     def testando_parametros_da_clean_position_cols(self):
         print('testando_parametros_da_clean_position_cols')
@@ -104,6 +107,8 @@ class testes_Limpador_fifa(unittest.TestCase):
             Limpador_fifa.clean_position_cols(tuple(1,2,3,4))
             Limpador_fifa.clean_position_cols('String')
             Limpador_fifa.clean_position_cols(50.5)
+        
+
 
 
     def testando_parametros_da_money_to_int(self):
@@ -120,6 +125,13 @@ class testes_Limpador_fifa(unittest.TestCase):
             Limpador_fifa.money_to_int(50.5)
             Limpador_fifa.money_to_int('35')
             Limpador_fifa.money_to_int('85G')
+        
+        
+        with self.assertRaises(pd.errors.NullFrequencyError):
+            Limpador_fifa.remove_plus_sign(float('nan'))
+            Limpador_fifa.remove_plus_sign(pd.NA)
+            Limpador_fifa.remove_plus_sign(nan)
+        
 
 
     def testando_parametros_clean_money_cols(self):
@@ -152,6 +164,11 @@ class testes_Limpador_fifa(unittest.TestCase):
             Limpador_fifa.lbs_to_kg('30T')
             Limpador_fifa.lbs_to_kg(50.5)
 
+        with self.assertRaises(pd.errors.NullFrequencyError):
+            Limpador_fifa.lbs_to_kg(float('nan'))
+            Limpador_fifa.lbs_to_kg(pd.NA)
+            Limpador_fifa.lbs_to_kg(nan)
+
     def testando_parametros_da_clean_weight_col(self):
         print("testando_parametros_da_clean_weight_col")
         #Caminho feliz
@@ -179,6 +196,11 @@ class testes_Limpador_fifa(unittest.TestCase):
             Limpador_fifa.ft_to_meters(tuple(1,2,3,4))
             Limpador_fifa.ft_to_meters('String')
             Limpador_fifa.ft_to_meters(50.5)
+        
+        with self.assertRaises(pd.errors.NullFrequencyError):
+            Limpador_fifa.ft_to_meters(float('nan'))
+            Limpador_fifa.ft_to_meters(pd.NA)
+            Limpador_fifa.ft_to_meters(nan)
 
     
     def testando_parametros_da_clean_height_col(self):
@@ -246,7 +268,6 @@ class testes_Limpador_ariport(unittest.TestCase):
     def setUpClass(cls):
         print('\n\n testes_db_cleaning_ariport \n\n')
         print('setupClass\n')
-
 
     @classmethod
     def tearDownClass(cls):
