@@ -12,7 +12,7 @@ df = db_connect.Conexao.create_df(tablename, cursor) -> tabelas disponíveis aba
 '''
 
 class Conexao:
-    """Métodos para necessários para a conexão com servidor SQl"""
+    """Métodos necessários para a conexão com servidor SQl"""
 
     server = 'tcp:fgv-db-server.database.windows.net,1433'
     database = 'fgv-db'
@@ -84,7 +84,11 @@ class Conexao:
         -------
         pd.DataFrame
             DataFrame com dados do banco
-
+            
+        Raises
+        ------
+        TypeError
+            Quando os parâmetros não correspondem aos tipos especificados
         """
 
         if type(tablename)!=str:
@@ -118,6 +122,9 @@ class Conexao:
             Nome do que será atribuido ao arquivo .csv
 
         Raises
+        ------
+        TypeError
+            Quando os parâmetros não correspondem aos tipos especificados
 
         """
         if type(df)!=pd.DataFrame or type(name)!= str:
