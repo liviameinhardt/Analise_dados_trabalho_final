@@ -339,8 +339,7 @@ class Limpador_fifa:
 
         """
 
-        array = (df['Preferred_Foot'] == 'Right')
-        df.loc[:, 'Preferred_Foot'] = array
+        df.loc[:, 'Preferred_Foot'] = pd.get_dummies(df['Preferred_Foot'])
         return df
 
     @classmethod
