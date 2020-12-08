@@ -1,4 +1,7 @@
 import pandas as pd
+from numpy import nan as np_nan
+from math import nan as math_nan
+from math import isnan
 
 class Limpador_airport:
     """Métodos necessários para a limpeza do covid_airports dataset"""
@@ -234,6 +237,9 @@ class Limpador_fifa:
 
         """
 
+        if str(string) == 'nan':
+            raise pd.errors.NullFrequencyError
+        
         if type(string) != str:
             raise TypeError
 
@@ -290,6 +296,9 @@ class Limpador_fifa:
             Erro na alteracao dos valores
 
         """
+        
+        if str(value) == 'nan':
+            raise pd.errors.NullFrequencyError
 
         if type(value) != str:
             raise TypeError
@@ -356,6 +365,9 @@ class Limpador_fifa:
 
         """
 
+        if str(value) == 'nan':
+            raise pd.errors.NullFrequencyError
+
         if type(value) != str:
             raise TypeError
 
@@ -411,6 +423,9 @@ class Limpador_fifa:
             Se a String não estiver em formato de pés, é levando a exceção.
 
         """
+        
+        if str(value) == 'nan':
+            raise pd.errors.NullFrequencyError
 
         if type(value) != str:
             raise TypeError
@@ -535,8 +550,9 @@ class Limpador_fifa:
         return df
 
 class indexes_not_found_in_dataframe(pd.errors.InvalidIndexError):
-    """ Exceção levantada quando não existem no DataFrame as colunas que seriam tratadas"""
+    """ Exceção levantada quando as colunas que seriam tratadas não existem no DataFrame """
     pass
+
 
 
 
