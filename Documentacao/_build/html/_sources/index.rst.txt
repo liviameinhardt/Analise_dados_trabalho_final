@@ -8,6 +8,9 @@ Welcome to Análise's documentation!
 .. automodule:: Base_de_dados_conexoes_e_limpeza.db_connection
    :members:
 
+.. automodule:: Base_de_dados_conexoes_e_limpeza.db_cleaning
+   :members:
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
