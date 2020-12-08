@@ -1,15 +1,40 @@
 import pandas as pd
 
 class Limpador_airport:
-
     @classmethod
-    def drop_cols(cls, df):
+    def drop_cols(cls, df:pd.DataFrame) -> pd.DataFrame:
+        """Remove as colunas consideradas pouco úteis
+
+        Parameters
+        ----------
+        df : pd.DataFrame
+            DataFrame com as colunas 'AggregationMethod', 'Unnamed: 0', 'Version', 'Centroid', 'Geography'
+
+        Returns
+        -------
+        pd.DataFrame
+            DataFrame sem as colunas 'AggregationMethod', 'Unnamed: 0', 'Version', 'Centroid', 'Geography'
+        """
         columns={'AggregationMethod', 'Unnamed: 0', 'Version', 'Centroid', 'Geography'}
         df.drop(columns=columns, inplace=True)
         return df
 
     @classmethod
-    def create_datetime_cols(cls, df):
+    def create_datetime_cols(cls, df:pd.DataFrame) -> pd.DataFrame:
+        """Convert a coluna Date nas colunas Year, Month e Day
+
+        Parameters
+        ----------
+        df : pd.DataFrame
+            DataFrame com a coluna Date
+
+        Returns
+        -------
+        pd.DataFrame
+            DataFrame com a coluna Date, Year, Month, Day no formato datetime
+            
+        """
+
         df.loc[:, 'Date'] = pd.to_datetime(df['Date'])
         df.loc[:, 'Year'] = df['Date'].dt.year
         df.loc[:, 'Month'] = df['Date'].dt.month
@@ -17,13 +42,38 @@ class Limpador_airport:
         return df
 
     @classmethod
-    def standardize_country_names(cls, df):
+    def standardize_country_names(cls, df:pd.DataFrame) -> pd.DataFrame:
+        """Padroniza a denomição United States para o Estados Unidos
+
+        Parameters
+        ----------
+        df : pd.DataFrame
+            Dataframe com a coluna Country com 'United States of America (the)', 'United States' em refencia ao país
+
+        Returns
+        -------
+        pd.DataFrame
+            Dataframe com a coluna Country com 'United States' em referência ao país
+
+        """
+
         df = df.copy()
         df.loc[:, 'Country'].replace('United States of America (the)', 'United States', inplace=True)
         return df
 
     @classmethod
-    def clean_dataframe(cls, df):
+    def clean_dataframe(cls, df:pd.DataFrame) -> pd.DataFrame:
+        """Faz a limpeza necessária para a análise dos dados
+
+        Parameters
+        ----------
+        df : pd.DataFrame
+
+        Returns
+        -------
+        pd.DataFrame
+            
+        """
         df = cls.drop_cols(df.copy())
         df = cls.create_datetime_cols(df.copy())
         df = cls.standardize_country_names(df.copy())
