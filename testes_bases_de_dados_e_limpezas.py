@@ -295,11 +295,13 @@ class testes_Limpador_fifa(unittest.TestCase):
             Limpador_fifa.foot_to_dummie(self.df_to_test_index)
 
 
-    def testando_parametros_da_clean_dataframe(self):
-        print('testando_parametros_da_clean_dataframe')
+    def testando_instancia_retornada_pela_clean_dataframe(self):
+        print('testando_instancia_retornada_pela_clean_dataframe')
         #Caminho feliz
         self.assertIsInstance(Limpador_fifa.clean_dataframe(self.df), pd.DataFrame)
         
+    def testando_excecoes_levantadas_pela_clean_dataframe(self):
+        print('testando_excecoes_levantadas_pela_clean_dataframe')
         with self.assertRaises(TypeError):
             Limpador_fifa.clean_dataframe([[1,2,3,4],[4,5,6,7]])
             Limpador_fifa.clean_dataframe(dict(oi= 1,tudo=2,bem=3))
@@ -328,13 +330,15 @@ class testes_Limpador_ariport(unittest.TestCase):
     def tearDown(self):
         print('tearDown\n')
 
-    def testando_parametros_drop_cols(self):
-        print('testando_parametros_drop_cols')
+    def testando_instancia_e_valores_retornados_pela_drop_cols(self):
+        print('testando_instancia_e_valores_retornados_pela_drop_cols')
         self.assertIsInstance(Limpador_airport.drop_cols(self.df), pd.DataFrame)
 
         df1=pd.DataFrame([[9,10,1,2,3,4,5]], columns=['Name','Age','AggregationMethod', 'Unnamed: 0', 'Version', 'Centroid', 'Geography'])
         pd.testing.assert_frame_equal(Limpador_airport.drop_cols(df1),pd.DataFrame([[9,10]], columns=['Name','Age']))
 
+    def testando_excecoes_levantadas_pela_drop_cols(self):
+        print("testando_excecoes_levantadas_pela_drop_cols")
         with self.assertRaises(TypeError):
             Limpador_airport.drop_cols([[1,2,3,4],[4,5,6,7]])
             Limpador_airport.drop_cols(dict(oi= 1,tudo=2,bem=3))
@@ -344,9 +348,12 @@ class testes_Limpador_ariport(unittest.TestCase):
         with self.assertRaises(indexes_not_found_in_dataframe):
             Limpador_airport.drop_cols(self.df_to_test_index)
     
-    def testando_parametros_create_datetime_cols(self):
-        print('testando_parametros_create_datetime_cols')
+    def testando_instancia_retornada_pela_create_datetime_cols(self):
+        print('testando_instancia_retornada_pela_create_datetime_cols')
         self.assertIsInstance(Limpador_airport.create_datetime_cols(self.df), pd.DataFrame)
+    
+    def testando_excecoes_levantadas_pela_create_datetime_cols(self):
+        print('testando_excecoes_levantadas_pela_create_datetime_cols')
         with self.assertRaises(TypeError):
             Limpador_airport.create_datetime_cols([[1,2,3,4],[4,5,6,7]])
             Limpador_airport.create_datetime_cols(dict(oi= 1,tudo=2,bem=3))
@@ -357,13 +364,15 @@ class testes_Limpador_ariport(unittest.TestCase):
             Limpador_airport.create_datetime_cols(self.df_to_test_index)
 
     
-    def testando_parametros_standardize_country_names(self):
-        print('testando_parametros_standardize_country_names')
+    def testando_instancia_e_valores_retornados_pela_country_names(self):
+        print('testando_instancia_e_valores_retornados_pela_country_names')
         self.assertIsInstance(Limpador_airport.standardize_country_names(self.df), pd.DataFrame)
 
         df1=pd.DataFrame([['United States of America (the)'],['United States']], columns=['Country'])
         pd.testing.assert_frame_equal(Limpador_airport.standardize_country_names(df1),pd.DataFrame([['United States'],['United States']], columns=['Country']))
 
+    def testando_excecoes_levantadas_pela_country_names(self):
+        print("testando_excecoes_levantadas_pela_country_names")
         with self.assertRaises(TypeError):
             Limpador_airport.standardize_country_names([[1,2,3,4],[4,5,6,7]])
             Limpador_airport.standardize_country_names(dict(oi= 1,tudo=2,bem=3))
@@ -374,9 +383,12 @@ class testes_Limpador_ariport(unittest.TestCase):
             Limpador_airport.standardize_country_names(self.df_to_test_index)
 
     
-    def testando_parametros_clean_dataframe(self):
+    def testando_instancia_retornada_pela_clean_dataframe(self):
         print('testando_parametros_clean_dataframe')
         self.assertIsInstance(Limpador_airport.clean_dataframe(self.df), pd.DataFrame)
+    
+    def testando_excecoes_levantadas_pela_clean_dataframe(self):
+        print("testando_excecoes_levantadas_pela_clean_dataframe(self)")
         with self.assertRaises(TypeError):
             Limpador_airport.clean_dataframe([[1,2,3,4],[4,5,6,7]])
             Limpador_airport.clean_dataframe(dict(oi= 1,tudo=2,bem=3))
