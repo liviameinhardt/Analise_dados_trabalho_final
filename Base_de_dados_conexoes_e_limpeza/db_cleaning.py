@@ -116,8 +116,14 @@ class Limpador_fifa:
             DataFrame sem as colunas 'Unnamed: 0', 'Counter', 'Photo', 'Flag', 'Club_Logo', 'Loaned_From', 'Real_Face' e 'Work_Rate'
 
         """
-
         columns={'Unnamed: 0', 'Counter', 'Photo', 'Flag', 'Club_Logo', 'Loaned_From', 'Real_Face', 'Work_Rate'}
+
+        if type(df) != pd.DataFrame:
+            raise TypeError
+        
+        if not (set(df.columns).issuperset(columns)):
+            raise indexes_not_found_in_dataframe
+
         df.drop(columns=columns, inplace=True)
         return df
 
@@ -136,6 +142,9 @@ class Limpador_fifa:
             Dataframe com linhas com no minimo 5 campos sem NaN
 
         """
+
+        if type(df) != pd.DataFrame:
+            raise TypeError
 
         non_na = df.shape[1] - 5 #Valor arbitrário para permitir alguns NA
         df.dropna(thresh=non_na, inplace=True)
@@ -157,6 +166,14 @@ class Limpador_fifa:
 
         """
 
+        columns = {'Release_Clause'}
+
+        if type(df) != pd.DataFrame:
+            raise TypeError
+
+        if not (set(df.columns).issuperset(columns)):
+            raise indexes_not_found_in_dataframe
+
         flt = df['Release_Clause'].notna()
         df = df[flt]
         return df
@@ -176,6 +193,13 @@ class Limpador_fifa:
             DataFrame com a coluna ID definida como index
 
         """
+        columns = {'ID'}
+
+        if type(df) != pd.DataFrame:
+            raise TypeError
+
+        if not (set(df.columns).issuperset(columns)):
+            raise indexes_not_found_in_dataframe
 
         df.set_index('ID', inplace=True)
         return df
@@ -201,6 +225,9 @@ class Limpador_fifa:
 
         """
 
+        if type(string) != str:
+            raise TypeError
+
         if string[-2] != '+':
             raise ValueError('Penúltimo dígito de {} não é um "+" - Ajustar função'.format(string))
         num = string[:-2]
@@ -221,6 +248,9 @@ class Limpador_fifa:
             Datframe sem informações de habilidade em cada posicionamento
 
         """
+
+        if type(df) != pd.DataFrame:
+            raise TypeError
 
         cols = list(df.columns)
         start = cols.index('LS')
@@ -251,6 +281,8 @@ class Limpador_fifa:
             Erro na alteracao dos valores
 
         """
+        if type(value) != str:
+            raise TypeError
 
         value = str(value)
         value = value[1:] # Remove €
@@ -280,7 +312,15 @@ class Limpador_fifa:
 
         """
 
+        if type(df) != pd.DataFrame:
+            raise TypeError
+
         cols = ['Value', 'Wage', 'Release_Clause']
+
+        if not (set(df.columns).issuperset(set(cols))):
+            raise indexes_not_found_in_dataframe
+
+        
         for col in cols:
             df.loc[:, col] = df[col].apply(cls.money_to_int)
         return df
@@ -306,6 +346,9 @@ class Limpador_fifa:
 
         """
 
+        if type(value) != str:
+            raise TypeError
+
         if value[-3:] != 'lbs':
             raise ValueError('Erro de unidade: três últimos dígitos de {} não são "lbs"'.format(value))
         value = float(value[:-3])
@@ -326,6 +369,13 @@ class Limpador_fifa:
             DataFrame com a feature Weight em Kilos.
 
         """
+        columns = {'Weight'}
+
+        if type(df) != pd.DataFrame:
+            raise TypeError
+
+        if not (set(df.columns).issuperset(columns)):
+            raise indexes_not_found_in_dataframe
 
         df.loc[:, 'Weight'] = df['Weight'].apply(cls.lbs_to_kg)
         return df
@@ -351,6 +401,9 @@ class Limpador_fifa:
 
         """
 
+        if type(value) != str:
+            raise TypeError
+
         if value[1] != '\'':
             raise ValueError('Segundo dígito de {} precisa ser uma aspas simples'.format(value))
         inches = int(value[0]) * 12
@@ -372,6 +425,15 @@ class Limpador_fifa:
             DataFrame com a feature Height em Metros.
 
         """
+
+        columns = {'Height'}
+
+        if type(df) != pd.DataFrame:
+            raise TypeError
+
+        if not (set(df.columns).issuperset(columns)):
+            raise indexes_not_found_in_dataframe
+
         df.loc[:, 'Height'] = df['Height'].apply(cls.ft_to_meters)
         return df
 
@@ -388,7 +450,17 @@ class Limpador_fifa:
         -------
         pd.DataFrame
             Dataframe fifa_players com as variáveis de data como datetime.
+
         """
+
+        columns={'Joined', 'Contract_Valid_Until'}
+
+        if type(df) != pd.DataFrame:
+            raise TypeError
+
+        if not (set(df.columns).issuperset(columns)):
+            raise indexes_not_found_in_dataframe
+
         df.loc[:, 'Joined'] = pd.to_datetime(df['Joined'])
         df.loc[:, 'Contract_Valid_Until'] = pd.to_numeric(df['Contract_Valid_Until'])
         return df
@@ -409,6 +481,14 @@ class Limpador_fifa:
 
         """
 
+        columns={'Preferred_Foot'}
+
+        if type(df) != pd.DataFrame:
+            raise TypeError
+
+        if not (set(df.columns).issuperset(columns)):
+            raise indexes_not_found_in_dataframe
+
         df.loc[:, 'Preferred_Foot'] = pd.get_dummies(df['Preferred_Foot'])
         return df
 
@@ -425,7 +505,12 @@ class Limpador_fifa:
         -------
         pd.DataFrame
             Dataframe com todos os dados necessários limpos
+
         """
+
+        if type(df) != pd.DataFrame:
+            raise TypeError
+
         df = cls.drop_cols(df.copy())
         df = cls.drop_na_pos(df.copy())
         df = cls.drop_na_ReleaseClause(df.copy())
