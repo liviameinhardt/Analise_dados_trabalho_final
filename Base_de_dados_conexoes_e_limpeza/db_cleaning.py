@@ -503,7 +503,7 @@ class Limpador_fifa:
         Returns
         -------
         df:pd.DataFrame
-        DataFrame com coluna 'Preferred_Foot' com valor 1 para Right e 0 para Left.
+        DataFrame com coluna 'Preferred_Foot' com valor 0 para Right e 1 para Left.
 
         """
 
