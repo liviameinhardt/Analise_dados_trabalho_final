@@ -1,6 +1,8 @@
 import pandas as pd
 
 class Limpador_airport:
+    """Métodos necessários para a limpeza do covid_airports dataset"""
+
     @classmethod
     def drop_cols(cls, df:pd.DataFrame) -> pd.DataFrame:
         """Remove as colunas consideradas pouco úteis
@@ -14,7 +16,9 @@ class Limpador_airport:
         -------
         pd.DataFrame
             DataFrame sem as colunas 'AggregationMethod', 'Unnamed: 0', 'Version', 'Centroid', 'Geography'
+
         """
+
         columns={'AggregationMethod', 'Unnamed: 0', 'Version', 'Centroid', 'Geography'}
         if type(df) != pd.DataFrame:
             raise TypeError
@@ -39,6 +43,7 @@ class Limpador_airport:
             DataFrame com a coluna Date, Year, Month, Day no formato datetime
             
         """
+
         if type(df) != pd.DataFrame:
             raise TypeError
     
@@ -67,6 +72,7 @@ class Limpador_airport:
             Dataframe com a coluna Country com 'United States' em referência ao país
 
         """
+
         columns = {'Country'}
 
         if type(df) != pd.DataFrame:
@@ -94,13 +100,14 @@ class Limpador_airport:
             DataFrame com os dados do covid_airport limpos.
 
         """
+
         df = cls.drop_cols(df.copy())
         df = cls.create_datetime_cols(df.copy())
         df = cls.standardize_country_names(df.copy())
         return df
 
 class Limpador_fifa:
-
+    """Métodos necessários para a limpeza do fifa_players dataset"""
     @classmethod
     def drop_cols(cls, df:pd.DataFrame) -> pd.DataFrame:
         """Remove do DataFrame algumas colunas consideradas pouco úteis para analise
@@ -116,6 +123,7 @@ class Limpador_fifa:
             DataFrame sem as colunas 'Unnamed: 0', 'Counter', 'Photo', 'Flag', 'Club_Logo', 'Loaned_From', 'Real_Face' e 'Work_Rate'
 
         """
+
         columns={'Unnamed: 0', 'Counter', 'Photo', 'Flag', 'Club_Logo', 'Loaned_From', 'Real_Face', 'Work_Rate'}
 
         if type(df) != pd.DataFrame:
@@ -193,6 +201,7 @@ class Limpador_fifa:
             DataFrame com a coluna ID definida como index
 
         """
+
         columns = {'ID'}
 
         if type(df) != pd.DataFrame:
@@ -281,6 +290,7 @@ class Limpador_fifa:
             Erro na alteracao dos valores
 
         """
+
         if type(value) != str:
             raise TypeError
 
@@ -369,6 +379,7 @@ class Limpador_fifa:
             DataFrame com a feature Weight em Kilos.
 
         """
+
         columns = {'Weight'}
 
         if type(df) != pd.DataFrame:
