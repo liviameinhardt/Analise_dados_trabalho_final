@@ -17,7 +17,7 @@ sys.path.insert(0, os.path.abspath('..'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'Estudo de caso'
+project = 'A2-L.P-2020'
 copyright = '2020, Luiz Luz'
 author = 'Ari Oliveira, João Pedro, Lívia Cereja, Luiz Luz'
 
