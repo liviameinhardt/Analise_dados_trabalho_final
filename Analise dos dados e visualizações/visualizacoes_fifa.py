@@ -10,7 +10,7 @@ Qual o número mais usado pelos os melhores jogadores de cada clube?
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-df = pd.read_csv("../Dados/fifa_players.csv")
+df = pd.read_csv("../Dados/fifa_players_clean.csv")
 
 
 
@@ -57,21 +57,36 @@ plt.show()
 
 
 #Como é a distribuição das habilidades por posição?
-def cria_dados_excel_habilidades_posicao(df,nome_do_arquivo):
-    hab_pos = df.groupby("Position")[habilidades].mean()
-    hab_pos = hab_pos.transpose()
-    hab_pos.to_excel(f"Dados Tableau/{nome_do_arquivo}.xlsx") 
-
-#analise pela média (geral)
+ 
 habilidades = list(df.columns)[48:-1]
-# cria_dados_excel_habilidades_posicao(df,"habilidades_posicao")
 
+# analise do melhor/ pior de posição
+# Posições agrupadas: ataque, meio-campo e defesa
+ataque = ["LS","ST","RS","LW","LF","CF","RF","RW"]
+meio_campo = ["LAM","CAM","RAM","LM","LCM","CM","RCM","RM"]
+defesa = ["LWB","LDM","CDM","RDM","RWB","LB","LCB","CB","RCB","RB"]
 
-#analise pela média dos "melhores"
-melhores = df.loc[df["Overall"]>90]
-# cria_dados_excel_habilidades_posicao(melhores,"habilidades_posicao_melhores")
+ataque = df.loc[df["Position"].isin(ataque)]
+meio_campo = df.loc[df["Position"].isin(meio_campo)]
+defesa = df.loc[df["Position"].isin(defesa)]
 
+# Encontrar melhores/piores jogadores em cada categoria 
+melhores_atacantes = ataque[ataque.Overall==ataque.Overall.max()].mean()
+piores_atacantes = ataque[ataque.Overall==ataque.Overall.min()].mean()
 
+melhores_meio_campo = meio_campo[meio_campo.Overall==meio_campo.Overall.max()].mean()
+piores_meio_campo = meio_campo[meio_campo.Overall==meio_campo.Overall.min()].mean()
+
+melhores_defesa = defesa[defesa.Overall==defesa.Overall.max()].mean()
+piores_defesa = defesa[defesa.Overall==defesa.Overall.min()].mean()
+
+# unir em um dataframe
+melhor_pior = pd.concat([melhores_atacantes, piores_atacantes,melhores_meio_campo,piores_meio_campo,melhores_defesa,piores_defesa], axis=1)
+melhor_pior.columns = ["melhores_atacantes", "piores_atacantes","melhores_meio_campo","piores_meio_campo","melhores_defesa","piores_defesa"]
+
+# filtrar e salvar
+melhor_pior = melhor_pior[melhor_pior.index.isin(habilidades)]
+#melhor_pior.to_excel("Dados Tableau/melhor_pior.xlsx") 
 
 
 # Qual o número mais usado pelos os melhores jogadores de cada clube?
