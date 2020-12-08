@@ -45,6 +45,9 @@ class testes_Limpador_fifa(unittest.TestCase):
     def testando_instancia_retornada_pela_drop_na_pos(self):
         print('testando_instancia_retornada_pela_drop_na_pos')
         self.assertIsInstance(Limpador_fifa.drop_na_pos(self.df),pd.DataFrame)
+    
+    def testando_excecoes_levantadas_pela_drop_na_pos(self):
+        print('testando_excecoes_levantadas_pela_drop_na_pos')
         with self.assertRaises(TypeError):
             Limpador_fifa.drop_na_pos([[1,2,3,4],[4,5,6,7]])
             Limpador_fifa.drop_na_pos(dict(oi= 1,tudo=2,bem=3))
@@ -52,14 +55,15 @@ class testes_Limpador_fifa(unittest.TestCase):
             Limpador_fifa.drop_na_pos('String')
             Limpador_fifa.drop_na_pos(50.5)
         
-    def testando_parametros_da_drop_na_ReleaseClause(self):
-        print('testando_parametros_da_drop_na_ReleaseClause')
+    def testando_instancia_e_valores_retornados_pela_drop_na_ReleaseClause(self):
+        print('testando_instancia_e_valores_retornados_pela_drop_na_ReleaseClause')
         #Caminho feliz
         self.assertIsInstance(Limpador_fifa.drop_na_ReleaseClause(self.df), pd.DataFrame)
-
         df1=pd.DataFrame([[9.0],[10.0], [math_nan], [float('nan')]], columns=['Release_Clause'])
         pd.testing.assert_frame_equal(Limpador_fifa.drop_na_ReleaseClause(df1),pd.DataFrame([[9.0],[10.0]], columns=['Release_Clause']))
-
+    
+    def testando_excecoes_levantadas_pela_drop_na_ReleaseClause(self):
+        print('testando_excecoes_levantadas_pela_drop_na_ReleaseClause')
         with self.assertRaises(TypeError):
             Limpador_fifa.drop_na_ReleaseClause([[1,2,3,4],[4,5,6,7]])
             Limpador_fifa.drop_na_ReleaseClause(dict(oi= 1,tudo=2,bem=3))
@@ -70,11 +74,13 @@ class testes_Limpador_fifa(unittest.TestCase):
         with self.assertRaises(indexes_not_found_in_dataframe):
             Limpador_fifa.drop_na_ReleaseClause(self.df_to_test_index)
     
-    def testando_parametros_da_set_index(self):
-        print('testando_parametros_da_set_index')
+    def testando_instancia_retornada_pela_set_index(self):
+        print('testando_instancia_retornada_pela_set_index')
         #Caminho feliz
         self.assertIsInstance(Limpador_fifa.set_index(self.df),pd.DataFrame)
-
+    
+    def testando_excecoes_levantadas_pela_set_index(self):
+        print('testando_excecoes_levantadas_pela_set_index')
         with self.assertRaises(TypeError):
             Limpador_fifa.set_index([[1,2,3,4],[4,5,6,7]])
             Limpador_fifa.set_index(dict(oi= 1,tudo=2,bem=3))
@@ -85,13 +91,16 @@ class testes_Limpador_fifa(unittest.TestCase):
         with self.assertRaises(indexes_not_found_in_dataframe):
             Limpador_fifa.set_index(self.df_to_test_index)
         
-    def testando_parametros_da_remove_plus_sign(self):
-        print('testando_parametros_da_remove_plus_sign')
+    def testando_valores_retornados_pela_remove_plus_sign(self):
+        print('testando_valores_retornados_pela_remove_plus_sign')
         #Caminho feliz
         self.assertEqual(Limpador_fifa.remove_plus_sign('88+2'), 88)
         self.assertEqual(Limpador_fifa.remove_plus_sign('91+3'), 91)
         self.assertEqual(Limpador_fifa.remove_plus_sign('9+3'), 9)
         self.assertEqual(Limpador_fifa.remove_plus_sign('90000+8'), 90000)
+    
+    def testando_excecoes_levantadas_pela_remove_plus_sign(self):
+        print('testando_excecoes_levantadas_pela_remove_plus_sign')
         with self.assertRaises(TypeError):
             Limpador_fifa.remove_plus_sign([[1,2,3,4],[4,5,6,7]])
             Limpador_fifa.remove_plus_sign(dict(oi= 1,tudo=2,bem=3))
@@ -102,11 +111,14 @@ class testes_Limpador_fifa(unittest.TestCase):
             Limpador_fifa.remove_plus_sign(pd.NA)
             Limpador_fifa.remove_plus_sign(nan)
 
-    def testando_parametros_da_clean_position_cols(self):
-        print('testando_parametros_da_clean_position_cols')
+    def testando_instancia_e_valores_retornados_pela_clean_position_cols(self):
+        print('testando_instancia_e_valores_retornados_pela_clean_position_cols')
         #Caminho feliz
         df = Limpador_fifa.drop_na_pos(self.df)
         self.assertIsInstance(Limpador_fifa.clean_position_cols(df),pd.DataFrame)
+
+    def testando_excecoes_levantadas_pela_clean_position_cols(self):
+        print('testando_excecoes_levantadas_pela_clean_position_cols')
         with self.assertRaises(TypeError):
             Limpador_fifa.clean_position_cols([[1,2,3,4],[4,5,6,7]])
             Limpador_fifa.clean_position_cols(dict(oi= 1,tudo=2,bem=3))
