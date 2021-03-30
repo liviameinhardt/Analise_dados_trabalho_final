@@ -9,6 +9,9 @@ O trabalho foi dividido em 4 etapas:
 - predição 
 - documentação 
 
+Todas as etapas são melhor descritas no relatório, disponível nesse repositório. 
+
+
 [Documentação Aqui](https://rawcdn.githack.com/liviameinhardt/Trabalho_Final_LP/35f0fce61f586ed7b634de55c3b125eae7b882fb/Documentacao/_build/html/index.html)
 
 
