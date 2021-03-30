@@ -1,16 +1,13 @@
-FEITO EM GRUPO
-
 -FIFA-
 Análise dos dados
 
 Salário x Habilidades - Modelo
 
-
-Análise das nacionalidades
-
 Nacionalidade x International_Reputation
-Melhor camisa por país
-	Separa por país - Pega n melhores jogadores - Vê camisa mais comum
+- Há relação entre reputação internacional e nacionalidade? Qual nação tem melhor/pior reputação?
+
+- Qual a numeração mais comum para o melhor jogador? (Análise por nacionalidade)
+	
 
 Prever posição baseado nas habilidades
 	- Regressão
@@ -21,17 +18,17 @@ Prever posição baseado nas habilidades
 		- Px' = p
 		- e = (b - p)
 
-Idade x Overall/potencial (perguntas separadas?)
-Valor x salário
+Idade x Overall/potencial 
+
+Valor (mercado) x salário
+
 Distribuição dos salários
 
-- Remover:
-	- Imagens
-	- Goleiro
-	- Loaned_From
 
 
 -AEROPORTO-
+Análise dos dados
+
 comparação da evolução países
 mais/menos afetados (aeroportos)
 maiores queda (país/estado)
